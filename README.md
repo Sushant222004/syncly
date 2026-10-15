@@ -51,7 +51,7 @@ Try Syncly here: [https://syncly-nine-jade.vercel.app](https://syncly-nine-jade.
 ## Screenshots
 
 ### Chat Interface
-![Syncly Chat Interface](screenshots/chat-interface.png)
+![Syncly Chat Interface](screenshots/Ai.png)
 
 ### AI Features
-![Syncly AI Features](screenshots/ai-features.png)
+![Syncly AI Features](screenshots/conversation.png)
