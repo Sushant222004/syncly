@@ -6,6 +6,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const { Server } = require("socket.io");
+const cors = require("cors");
 
 const User = require("./models/User");
 const Message = require("./models/Message");
@@ -18,6 +19,17 @@ const aiRoutes = require("./routes/aiRoutes");
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://syncly-nine-jade.vercel.app",
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  }),
+);
 const server = http.createServer(app);
 
 const PORT = process.env.PORT || 5000;
@@ -32,8 +44,9 @@ app.use(express.json());
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "https://syncly-nine-jade.vercel.app"],
     methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 
