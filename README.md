@@ -43,3 +43,15 @@ real-time communication and MongoDB for data persistence.
 
 ### AI Integration
 - AI APIs
+
+## Live Demo
+
+Try Syncly here: [https://syncly-nine-jade.vercel.app](https://syncly-nine-jade.vercel.app/)
+
+## Screenshots
+
+### Chat Interface
+![Syncly Chat Interface](screenshots/chat-interface.png)
+
+### AI Features
+![Syncly AI Features](screenshots/ai-features.png)
