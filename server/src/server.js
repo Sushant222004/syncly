@@ -2,10 +2,10 @@ require("dotenv").config();
 
 const http = require("http");
 const express = require("express");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const { Server } = require("socket.io");
-const cors = require("cors");
 
 const User = require("./models/User");
 const Message = require("./models/Message");
@@ -18,6 +18,7 @@ const aiRoutes = require("./routes/aiRoutes");
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
+
 const allowedOrigins = [
   "http://localhost:5173",
   "https://syncly-nine-jade.vercel.app",
@@ -29,17 +30,12 @@ app.use(
     credentials: true,
   }),
 );
+
+app.use(express.json());
+
 const server = http.createServer(app);
 
 const PORT = process.env.PORT || 5000;
-
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-  }),
-);
-
-app.use(express.json());
 
 const io = new Server(server, {
   cors: {
