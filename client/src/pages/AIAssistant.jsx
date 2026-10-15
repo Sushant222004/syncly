@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
+import API_URL from "../config";
 
 function AIAssistant() {
   const [message, setMessage] = useState("");
@@ -26,7 +27,7 @@ function AIAssistant() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/ai/ask", {
+      const response = await fetch(`${API_URL}/api/ai/ask`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

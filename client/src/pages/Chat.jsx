@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../config";
 
 const Chat = () => {
   const [selectedConversation, setSelectedConversation] = useState(null);
@@ -40,7 +41,7 @@ const Chat = () => {
   }, [selectedConversation]);
   useEffect(() => {
     if (!user) return;
-    const socket = io("http://localhost:5000", {
+    const socket = io(`${API_URL}`, {
       auth: {
         token: localStorage.getItem("authToken"),
       },
@@ -230,7 +231,7 @@ const Chat = () => {
     setUploading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/upload", {
+      const response = await fetch(`${API_URL}/api/upload`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -265,7 +266,7 @@ const Chat = () => {
     setLoadingState(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/conversations", {
+      const response = await fetch(`${API_URL}/api/conversations`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -296,7 +297,7 @@ const Chat = () => {
     try {
       const token = localStorage.getItem("authToken");
 
-      const response = await fetch("http://localhost:5000/api/users", {
+      const response = await fetch(`${API_URL}/api/users`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -321,7 +322,7 @@ const Chat = () => {
       const token = localStorage.getItem("authToken");
 
       const response = await fetch(
-        "http://localhost:5000/api/conversations/direct",
+        `${API_URL}/api/conversations/direct`,
         {
           method: "POST",
           headers: {
@@ -410,7 +411,7 @@ const Chat = () => {
 
       try {
         const response = await fetch(
-          `http://localhost:5000/api/auth/messages/${currentConversationId}`,
+          `${API_URL}/api/auth/messages/${currentConversationId}`,
           {
             method: "GET",
             headers: {
@@ -458,7 +459,7 @@ const Chat = () => {
 
     const token = localStorage.getItem("authToken");
 
-    const response = await fetch("http://localhost:5000/api/auth/messages", {
+    const response = await fetch(`${API_URL}/api/auth/messages`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -512,7 +513,7 @@ const Chat = () => {
         })
         .join("\n");
 
-      const response = await fetch("http://localhost:5000/api/ai/ask", {
+      const response = await fetch(`${API_URL}/api/ai/ask`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -576,7 +577,7 @@ Return only a JSON array of 3 strings, with no markdown or additional text.`,
         })
         .join("\n");
 
-      const response = await fetch("http://localhost:5000/api/ai/ask", {
+      const response = await fetch(`${API_URL}/api/ai/ask`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -618,7 +619,7 @@ ${conversationText}`,
       const token = localStorage.getItem("authToken");
 
       try {
-        const response = await fetch("http://localhost:5000/api/auth/users", {
+        const response = await fetch(`${API_URL}/api/auth/users`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -652,7 +653,7 @@ ${conversationText}`,
     const token = localStorage.getItem("authToken");
 
     const response = await fetch(
-      "http://localhost:5000/api/auth/conversations/group",
+      `${API_URL}/api/auth/conversations/group`,
       {
         method: "POST",
         headers: {

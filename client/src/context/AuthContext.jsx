@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-
+import API_URL from "../config";
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
@@ -17,7 +17,7 @@ export function AuthProvider({ children }) {
     const formData = new FormData();
     formData.append("avatar", file);
 
-    const response = await fetch("http://localhost:5000/api/me/avatar", {
+    const response = await fetch(`${API_URL}/api/me/avatar`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -50,7 +50,7 @@ export function AuthProvider({ children }) {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/me", {
+      const response = await fetch(`${API_URL}/api/auth/me`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

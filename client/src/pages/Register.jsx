@@ -1,6 +1,8 @@
 import { useState } from "react";
 import backImage from "../assets/image.png";
 import { Link } from "react-router-dom";
+import API_URL from "../config";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [data, setData] = useState({
@@ -13,6 +15,7 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -32,7 +35,7 @@ const Register = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/register", {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -55,6 +58,7 @@ const Register = () => {
         email: "",
         password: "",
       });
+      navigate("/chat");
     } catch (error) {
       console.error(error);
       setMessage("Unable to connect to the server");

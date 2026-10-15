@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
+import API_URL from "../config";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { user, getCurrentUser, logout } = useContext(AuthContext);
@@ -12,9 +14,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
-
- 
-
+  const navigate = useNavigate();
   function handleChange(e) {
     const { name, value } = e.target;
 
@@ -33,7 +33,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const response = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -54,6 +54,7 @@ const Login = () => {
 
       setMessage("Login successful!");
       await getCurrentUser();
+      navigate("/chat");
     } catch (error) {
       console.log(error);
       setMessage("Unable to connect to the server");
